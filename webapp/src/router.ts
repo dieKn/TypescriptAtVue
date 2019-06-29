@@ -26,5 +26,10 @@ export default new Router({
       name: 'top',
       component: () => import('./views/Top.vue')
     },
+    {
+      path: '/habit',
+      name: 'habit',
+      component: () => import('./views/Habit.vue')
+    },
   ]
 })
