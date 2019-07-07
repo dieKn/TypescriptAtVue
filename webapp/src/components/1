@@ -1,7 +1,7 @@
 <template>
   <div id="myButton">
     <button @click="onClickApi">SendButton</button>
-    <p>{{customer.firstName}}</p>
+    <p>{{customerId}}</p>
   </div>
 </template>
 
@@ -13,8 +13,9 @@
     export default class MyButton extends Vue{
 	@Prop()
 	public greet?: string;
-	public customer: Customer = new Customer(0, "test0", "user0");	
-
+	public test: number = 3;
+	public customerId: Number = 0;
+	
 	public myButton(){
 		alert(this.greet);
 		alert("world!");
@@ -26,8 +27,8 @@
 		.then(res => {
 			console.log(res);
 			let customers: Customer[]= res;
-			this.customer = customers[0];
-			console.log(this.customer.firstName);
+			this.customerId = customers[0].id;
+			console.log(customers, this.customerId);
 		});
 	}
 	public testMapping(apiResponse: any){
