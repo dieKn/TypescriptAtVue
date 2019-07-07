@@ -9,7 +9,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -25,6 +25,11 @@ export default new Router({
       path: '/top',
       name: 'top',
       component: () => import('./views/Top.vue')
+    },
+    {
+    path: '/',
+      name: 'habit',
+      component: () => import('./views/Habit.vue')
     },
   ]
 })
