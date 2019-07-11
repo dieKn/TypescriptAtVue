@@ -22,7 +22,7 @@
 	}
 	public onClickApi(){
 		let customers: Customer[];
-		main('http://10.138.97.192:8080/customer')
+		main('http://192.168.0.10:8080/customer')
 		.then(res => {
 			console.log(res);
 			let customers: Customer[]= res;

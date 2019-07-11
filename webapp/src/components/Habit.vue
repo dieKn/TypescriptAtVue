@@ -19,24 +19,38 @@
 
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
-
+    import {Habit} from "./model/Habit";
+    import axios from "axios";
     @Component
     export default class HabitList extends Vue{
 	newHabit: string = '';
-	habits: {habit: string, actCheck: boolean}[] = [
-			{habit: "Typescript", actCheck: true}, 
-			{habit: "Swift", actCheck: false}
+//	public customer: Customer = new Customer(0, "test0", "user0");
+	habits: Habit[] = [
+//			{habit: "Typescript", actCheck: true}, 
+//			{habit: "Swift", actCheck: false}
 		];
 	
+	mounted() {
+		this.onClickApi();
+  	}
+
 	//methods
+	public onClickApi(){
+                main('http://192.168.0.10:8080/habits')
+                .then(res => {
+                        console.log(res);
+                        this.habits = res 
+                        console.log(this.habits[0].habit);
+                });
+        }
 	addHabit(): void{
 		if(this.newHabit == ''){ return }
 		this.habits.push(
-			{habit: this.newHabit, actCheck: false}
+			{id: 3, habit: this.newHabit, actCheck: false}
 		);
 		this.newHabit = '';
 	}
-	deleteHabit(item: {habit: string, actCheck: boolean}): void{
+	deleteHabit(item: {id: number, habit: string, actCheck: boolean}): void{
 		//this.habits = this.habits.splice(item, 1);
 		console.log(this.habits.indexOf(item));
 		this.habits.splice(this.habits.indexOf(item), 1);
@@ -51,6 +65,15 @@
 		}
 		return counter;
 	}
+    }
+    
+    export async function main(url: string) {
+          try {
+            const { data } = await axios.get(url);
+            return data;  // { message: "Real response!" }
+          } catch (err) {
+            throw new Error(err.message);
+          }
     }
 
 </script>
